@@ -14,9 +14,9 @@ class Server {
     this.app = express();
     this.port = envs.PORT;
     this.paths  = {
-      auth: 'api/auth',
-      blob: 'api/storage/blob',
-      container: 'api/storage/container'
+      auth: '/api/auth',
+      blob: '/api/storage/blob',
+      container: '/api/storage/container'
     }
 
     // conectar a la base de datos
