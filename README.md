@@ -9,9 +9,9 @@ This project is a simple example of how to use Azure Blob Storage and Azure Data
 
 The project consists of three routes:
 
-auth: 'api/auth',
-blob: 'api/storage/blob',
-container: 'api/storage/container'
+* auth: 'api/auth',
+* blob: 'api/storage/blob',
+* container: 'api/storage/container'
 
 ### Routes
 
