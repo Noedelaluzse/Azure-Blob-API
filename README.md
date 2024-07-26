@@ -31,7 +31,6 @@ api/storage/container is a route that allows you to create a container in Azure 
 The project uses the following libraries:
 
 - [Azure Storage SDK](https://www.npmjs.com/package/@azure/storage-blob)
-- [Azure Identity](https://www.npmjs.com/package/@azure/identity)
 - [Express](https://www.npmjs.com/package/express)
 - [Mongoose](https://www.npmjs.com/package/mongoose)
 
