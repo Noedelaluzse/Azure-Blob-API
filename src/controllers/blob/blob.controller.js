@@ -9,6 +9,11 @@ export const uploadBlob = async(req, res) => {
   try {
 
     const { container } = req.body;
+
+    if (container === undefined) {
+      return res.status(400).json({"message": "Container name is required"});
+    }
+    
     const { originalname, buffer } = req.file;
 
     const containerClient = blobSevice.getContainerClient(container);

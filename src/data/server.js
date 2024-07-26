@@ -43,11 +43,11 @@ class Server {
     // Directorio publico
     this.app.use(express.static(envs.PUBLIC_PATH));
 
-    this.app.use(fileUpload( {
-      useTempFiles: true,
-      tempFileDir: '/tmp/',
-      createParentPath: true
-    }));
+    // this.app.use(fileUpload( {
+    //   useTempFiles: true,
+    //   tempFileDir: '/tmp/',
+    //   createParentPath: true
+    // }));
   }
 
   routes() {
