@@ -1,13 +1,22 @@
 import { bcryptAdapter } from "../../config/bcrypt.adapter.js";
 import { JwtAdapter } from "../../config/jwt.adapter.js";
+import { matchDataAdapter } from "../../config/validator.adapter.js";
 import { UserModel } from "../../data/mongo/models/user.model.js";
 
 export const register = async(req, res) => {
   try {
-    // ! req = matchedData(req);
 
-    const password = bcryptAdapter.hash(req.body.password);
-    const body = {...req.body, password };
+    req = matchDataAdapter(req); // Obtener el objeto enviado desde el Front validado
+
+    const { phone, password } = req;
+
+    const userOnDb = await UserModel.findOne({phone: phone});
+
+    if (userOnDb) return res.status(400).json({message: 'User already exists'});
+
+    const hashPassword = bcryptAdapter.hash(password);
+    
+    const body = {...req, password: hashPassword };
 
     const user = await UserModel.create(body);
 
@@ -73,7 +82,6 @@ export const confirmation = async(req, res) => {
   
   const payload = await JwtAdapter.validateToken(token);
 
-  console.log(payload);
   if (!payload) return res.status(401).json({message: 'Error validating user'});
 
   try {
@@ -82,7 +90,7 @@ export const confirmation = async(req, res) => {
 
     if (!user) res.status(401).json({message: 'Username does not exist'});
 
-    console.log(user);
+    if (user.wasValidated) res.status(401).json({message: 'The user has already been validated '})
 
     await  UserModel.findByIdAndUpdate(user.id, {wasValidated: true});
 
